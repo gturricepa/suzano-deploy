@@ -36,6 +36,7 @@ function HomePath() {
         setData(apiData);
       } catch (error) {
         console.error("Error fetching data:", error);
+        // @ts-ignore
         setError(error.message);
       }
     };
