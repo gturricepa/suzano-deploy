@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Home } from "@/pages/templates/home";
+import Home from "@/pages/templates/home";
 interface Atividade {
   marcaTemporal: string;
   dataDaActividade: string;

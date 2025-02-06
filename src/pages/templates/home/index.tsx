@@ -21,7 +21,7 @@ interface HomeProps {
   data: Atividade[];
 }
 
-export const Home: React.FC<HomeProps> = ({ data }) => {
+const Home: React.FC<HomeProps> = ({ data }) => {
   console.log(data);
   return (
     <S.Holder>
@@ -79,3 +79,4 @@ export const Home: React.FC<HomeProps> = ({ data }) => {
     </S.Holder>
   );
 };
+export default Home;
