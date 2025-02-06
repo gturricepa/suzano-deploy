@@ -10,7 +10,9 @@ export default async function (req, res) {
     const serviceAccountAuth = new JWT({
       email: process.env.email,
       // @ts-ignore
-      key: process.env.key.replace(/\\n/g, "\n"),
+      // key: process.env.key.replace(/\\n/g, "\n"),
+      key: process.env.key,
+
       scopes: ["https://www.googleapis.com/auth/spreadsheets"],
     });
 
