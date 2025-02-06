@@ -23,6 +23,11 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = ({ data }) => {
   console.log(data);
+
+  if (!Array.isArray(data)) {
+    return <p>Erro: Dados inválidos.</p>;
+  }
+
   return (
     <S.Holder>
       {data.length > 0 ? (

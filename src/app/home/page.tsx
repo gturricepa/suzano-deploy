@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Home from "@/pages/templates/home";
+
 interface Atividade {
   marcaTemporal: string;
   dataDaActividade: string;
@@ -22,7 +23,7 @@ interface Atividade {
 type Atividades = Atividade[];
 
 function HomePath() {
-  const [data, setData] = useState<Atividades | null>(null);
+  const [data, setData] = useState<Atividades>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -48,13 +49,13 @@ function HomePath() {
     return <div>Erro: {error}</div>;
   }
 
-  if (!data) {
-    return <div>Carregando...</div>;
-  }
-
   return (
     <>
-      <Home data={data} />
+      {data.length === 0 ? (
+        <div>Nenhuma atividade encontrada.</div>
+      ) : (
+        <Home data={data} />
+      )}
     </>
   );
 }
