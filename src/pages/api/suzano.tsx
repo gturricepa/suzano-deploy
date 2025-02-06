@@ -1,17 +1,20 @@
 import { GoogleSpreadsheet } from "google-spreadsheet";
 import { JWT } from "google-auth-library";
 import credentials from "../../config/config.json";
+import { config } from "dotenv";
+
+config();
 
 export default async function (req, res) {
   try {
     const serviceAccountAuth = new JWT({
-      email: credentials.client_email,
-      key: credentials.private_key,
+      email: process.env.email,
+      key: process.env.key.replace(/\\n/g, "\n"),
       scopes: ["https://www.googleapis.com/auth/spreadsheets"],
     });
 
     const doc = new GoogleSpreadsheet(
-      "1ladXmldMggj8VjDH884MW9Rnv6ahsWFit-FaP8llczA",
+      process.env.apiGoogle,
       serviceAccountAuth
     );
 
@@ -38,7 +41,7 @@ export default async function (req, res) {
 
     res.status(200).json(data);
   } catch (e) {
-    console.error("Error:", e);
+    console.error("Error!:", e);
     res.status(500).json({ error: "Internal Server Error" });
   }
 }
