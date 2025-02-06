@@ -23,21 +23,20 @@ interface Atividade {
 type Atividades = Atividade[];
 
 function HomePath() {
-  const [data, setData] = useState<Atividades>([]);
-  const [error, setError] = useState<string | null>(null);
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch("http://localhost:3000/api/suzano");
-        if (!response.ok) {
-          throw new Error("Erro na resposta da API");
-        }
-        const apiData: Atividades = await response.json();
+        if (!response.ok) throw new Error("Erro na resposta da API");
+        const apiData = await response.json();
         setData(apiData);
       } catch (error) {
         console.error("Error fetching data:", error);
         // @ts-ignore
+
         setError(error.message);
       }
     };
@@ -45,19 +44,10 @@ function HomePath() {
     fetchData();
   }, []);
 
-  if (error) {
-    return <div>Erro: {error}</div>;
-  }
+  if (error) return <div>Erro: {error}</div>;
+  if (!data.length) return <div>Carregando...</div>;
 
-  return (
-    <>
-      {data.length === 0 ? (
-        <div>Nenhuma atividade encontrada.</div>
-      ) : (
-        <Home data={data} />
-      )}
-    </>
-  );
+  return <Home data={data} />;
 }
 
 export default HomePath;
