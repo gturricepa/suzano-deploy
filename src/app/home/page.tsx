@@ -29,7 +29,9 @@ function HomePath() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/suzano");
+        const response = await fetch(
+          "https://suzano-cepa.vercel.app/api/suzano"
+        );
         if (!response.ok) throw new Error("Erro na resposta da API");
         const apiData = await response.json();
         setData(apiData);
